@@ -33,7 +33,7 @@ let gimGum=new Book('Gim Gum','Sugma','93','yes');
 addBookToLibrary(fatCat);
 addBookToLibrary(gimGum);
 
-//const read=document.getElementById('Read Form');
+//const read=document.getElementById('read');
 function Book(title, author, pages, read){
     this.name=title;
         let libTitle=document.createElement('p');
@@ -54,7 +54,7 @@ function Book(title, author, pages, read){
     let changeReadBtn=document.createElement('button');
     changeReadBtn.innerText=read;
         libRead.appendChild(changeReadBtn);
-    changeReadBtn.addEventListener('click',function(){
+    changeReadBtn.addEventListener('click',()=>{console.log(this)
             
             if(changeReadBtn.innerText==='no'){
                 changeReadBtn.innerText='yes';
@@ -67,19 +67,23 @@ function Book(title, author, pages, read){
         }
         );
     
-        
+        let removeBtn=document.createElement('button');
+            libRead.appendChild(removeBtn)
+            removeBtn.innerText='remove'
+        removeBtn.addEventListener('click',()=>{
+        })
     this.info=title+' by '+author+', '+pages+' pages, read?: '+this.beenRead;
     }
 
-
-
+// psudo function that removes book
+// myLibrary.splice
 
 function addBookToLibrary(book){
 myLibrary.push(book);
 }
 
 
-
+//never called keeping for now
 function buildLibrary(){
     for(let i=0; i<myLibrary.length; i++){
         let newTitle=document.createElement('p');
