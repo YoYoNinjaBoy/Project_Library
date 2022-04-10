@@ -13,37 +13,35 @@
         <strong>My Library</strong>
     </header>
     <main>
-        <div class="flex-container">
-            <div id="libraryContainer"></div>
-            <fieldset id="bookForm">
-                <legend><strong>Add a book!</strong></legend>
-                <form action="post">
-                    <label class="formLabel" for="title"><strong>Title</strong></label>
-                    <br>
-                    <input id="newTitle" type="text" name="title">
-                    <br>
-                    <label class="formLabel" for="author"><strong>Author</strong></label>
-                    <br>
-                    <input name="author" id="newAuthor" type="text">
-                    <br>
-                    <label for="numOfPages" class="formLabel"><strong># of Pages</strong></label>
-                    <br>
-                    <input type="number" id="newPages" name="numOfPages">
-                    <br>
-                    <label for="read_status" class="formRead"><strong>Status</strong></label>
-                    <br>
-                    <select name="read_status" id="readStatus">
-                        <option value="Unread">Unread</option>
-                        <option value="Read">Read</option>
-                        <option value="Reading">Reading</option>
-                    </select>
-                    <br>
-                    <button id="resetBtn" type="reset">Reset</button>
-                    <button type="submit" id="submitBtn">Submit</button>
-            
-                </form>
-            </fieldset>
-        </div>
+        <fieldset id="bookForm">
+            <h1>Add a Book!</h1>
+            <form action="post">
+                <label class="formLabel" for="title"><strong>Title</strong></label>
+                <br>
+                <input placeholder="ex: The Hobbit" id="newTitle" type="text" name="title">
+                <br>
+                <label class="formLabel" for="author"><strong>Author</strong></label>
+                <br>
+                <input name="author" id="newAuthor" type="text">
+                <br>
+                <label for="numOfPages" class="formLabel"><strong># of Pages</strong></label>
+                <br>
+                <input type="number" id="newPages" name="numOfPages">
+                <br>
+                <label for="read_status" class="formRead"><strong>Status</strong></label>
+                <br>
+                <select name="read_status" id="readStatus">
+                    <option value="Unread">Unread</option>
+                    <option value="Read">Read</option>
+                    <option value="Reading">Reading</option>
+                </select>
+                <br>
+                <button type='button' id="submitBtn">Add book!</button>
+                <button id="resetBtn" type="reset">Reset</button>
+                
+            </form>
+        </fieldset>
+        <div id="libraryContainer"></div>
     </main>
     <script src="script.js"></script>
 </body>
