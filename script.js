@@ -1,147 +1,107 @@
 'use strict'
 let myLibrary=[];
-const titleContainer=document.getElementById('titleContainer');
-const authorContainer=document.getElementById('authorContainer');
-const pagesContainer=document.getElementById('pagesContainer');
-const readContainer=document.getElementById('readContainer');
-const editContainer=document.getElementById('editContainer');
+const libContainer=document.getElementById('libraryContainer')
 
-
-document.getElementById('submit').addEventListener('click',function(){
-    let titleForm=document.getElementById('title').value;
-    let authorForm=document.getElementById('author').value;
-    let pagesForm=document.getElementById('pages').value;
-    let readChecked=document.getElementById('read');
-    let readForm;
-    
-        
-    if (titleForm===''||authorForm===''||isNaN(pagesForm)===true||pagesForm===''){
-alert('xd')
-    }
-    
-    
-    else{
-    if (readChecked.checked){readForm='yes'}
-    else{readForm='no'}
-    addBookToLibrary(new Book(titleForm,authorForm,pagesForm,readForm));
-    //buildLibrary();
-        }
-    }
-)
-let fatCat=new Book('fat cat','I.C. Weiner','123','no');
-let gimGum=new Book('Gim Gum','Sugma','93','yes');
-addBookToLibrary(fatCat);
-addBookToLibrary(gimGum);
-
-//const read=document.getElementById('read');
-function Book(title, author, pages, read){
-    this.name=title;
-        let libTitle=document.createElement('p');
-        libTitle.textContent=title;
-        titleContainer.appendChild(libTitle);
+function Book(title,author,numOfPages,read){
+    this.title=title;
     this.author=author;
-        let libAuthor=document.createElement('p');
-        libAuthor.textContent=author;
-        authorContainer.appendChild(libAuthor);
-    this.numOfPages=pages;
-        let libNumPages=document.createElement('p');
-        libNumPages.textContent=pages;
-        pagesContainer.appendChild(libNumPages);
-    this.beenRead=read;
-        let libRead=document.createElement('p');
-        libRead.textContent='';
-        readContainer.appendChild(libRead);
-    let changeReadBtn=document.createElement('button');
-    changeReadBtn.innerText=read;
-        libRead.appendChild(changeReadBtn);
-    changeReadBtn.addEventListener('click',()=>{console.log(this)
-            
-            if(changeReadBtn.innerText==='no'){
-                changeReadBtn.innerText='yes';
-                this.beenRead='yes';
-            }
-            else if (changeReadBtn.innerText==='yes'){
-                changeReadBtn.innerText='no';
-                this.beenRead='no';
-            }
-        }
-        );
-    
-        let removeBtn=document.createElement('button');
-            libRead.appendChild(removeBtn)
-            removeBtn.innerText='remove'
-        removeBtn.addEventListener('click',()=>{
-        })
-    this.info=title+' by '+author+', '+pages+' pages, read?: '+this.beenRead;
-    }
-
-// psudo function that removes book
-// myLibrary.splice
-
-function addBookToLibrary(book){
-myLibrary.push(book);
+    this.numOfPages=numOfPages;
+    this.read=read;
+    this.bookId=title+author
 }
 
 
-//never called keeping for now
-function buildLibrary(){
-    for(let i=0; i<myLibrary.length; i++){
-        let newTitle=document.createElement('p');
-            newTitle.textContent=myLibrary[i].name;
-            titleContainer.appendChild(newTitle);
-        
-        let newAuthor=document.createElement('p');
-            newAuthor.textContent=myLibrary[i].author;
-            authorContainer.appendChild(newAuthor);
-        
-        let newPages=document.createElement('p');
-            newPages.textContent=myLibrary[i].numOfPages;
-            pagesContainer.appendChild(newPages)
-        
-        let newRead=document.createElement(`p`);
-            readContainer.appendChild(newRead);
-            newRead.textContent=myLibrary[i].beenRead;
+let fatCat=new Book('fat cat and the ever increasingly long title','I.C. Weiner','123','Unread');
+let gimGum=new Book('Gim Gum','Sugma','93','Read');
 
-        let newChangeBtn=myLibrary[i].changeReadBtn;
-            readContainer.appendChild(newChangeBtn)
+myLibrary.push(fatCat);
+myLibrary.push(gimGum);
 
-        }
-}
+
+
+function createCard(book){
+    let card=document.createElement('div');
+        card.className='card';
+        card.id=book.title+book.author;
     
-        
-       // btn.addEventListener('click',function(){
-       //     //probelm
-       //     if (myLibrary[i].beenRead='yes'){
-       //         myLibrary[i].beenRead='no'
-       //     }
-       //     else if (myLibrary[i].beenRead='no'){
-       //         myLibrary[i].beenRead='yes'
-       //     }
-       // })
-       // btn.textContent='change';
-       // newRead.appendChild(btn);
-        //document.getElementById('titleContainer').appendChild(document.createElement('div').textContent=myLibrary[i].name)
-        
-        
+    let title=document.createElement('h2');
+        title.className='info';
+        title.textContent=book.title;
 
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
-  function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    } 
+    
 
-const addBookBtn=document.getElementById('newBookBtn');
-addBookBtn.addEventListener('click',function(){
-    openForm()
-})
-//buildLibrary()
+    let author=document.createElement('h4');
+        author.className='info';
+        author.textContent=book.author;
 
-let a=document.createElement('p')
-body=document.getElementById('body')
-a.textContent='ass'
-body.appendChild(a);
-let b=document.createElement('button')
-b.textContent='tiddies';
-b.onclick = () =>buildLibrary();
-a.appendChild(b)
+    let authorHeader=document.createElement('p');
+        authorHeader.className='authorHeader';
+        authorHeader.textContent='By'
+
+    let pages=document.createElement('h5');
+        pages.className='info';
+        pages.textContent=book.numOfPages+' pages';
+
+    
+    
+    let read=document.createElement('p');
+        read.className='info';
+        read.textContent=book.read;
+
+
+
+    let deleteBtn=document.createElement('button');
+    deleteBtn.className='deleteBtn'
+    deleteBtn.textContent='X'
+    deleteBtn.addEventListener('click', () => {
+        if(confirm("Press OK to remove the book or Cancel to cancel")===true){
+        let elem=document.getElementById(card.id);
+        elem.parentElement.removeChild(elem);
+        }
+    })
+
+    libContainer.appendChild(card);
+    card.appendChild(title);
+    card.appendChild(authorHeader);
+    card.appendChild(author);
+    card.appendChild(pages);
+    card.appendChild(read);
+    card.appendChild(deleteBtn)
+
+
+};
+createCard(gimGum);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
+createCard(fatCat);
