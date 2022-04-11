@@ -24,7 +24,7 @@ myLibrary.unshift(fatCat);
 function createCard(book){
     let card=document.createElement('div');
         card.className='card';
-        card.id=book.title+book.author;
+        card.id=book.title+book.author+book.numOfPages;
     
     let title=document.createElement('h2');
         title.className='info';
@@ -60,6 +60,12 @@ function createCard(book){
         let elem=document.getElementById(card.id);
         elem.parentElement.removeChild(elem);
         //pseudo code remove Book from myLibrary array
+        for(let i=0; i<myLibrary.length; i++){
+            if(card.id==myLibrary[i].bookId){
+                myLibrary.splice(i,1);
+            }
+        }
+        console.log(myLibrary);
         }
     })
 
@@ -74,7 +80,6 @@ function createCard(book){
 
 };
 for(let i=myLibrary.length-1; i>=0; i--){
-    console.log(i);
     createCard(myLibrary[i]);
 }
 
